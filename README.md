@@ -4,9 +4,10 @@ Estrutura base (sem código) para iniciar projetos fullstack com padrões consis
 
 | Pasta         | Responsabilidade                                      | Padrão principal                         |
 |---------------|-------------------------------------------------------|------------------------------------------|
-| `backend/`    | API, regras de negócio, persistência                  | Clean Architecture + DDD modular         |
-| `frontend/`   | Interface, estado de UI, consumo da API               | Feature-based + Atomic Design            |
-| `mcp-server/` | Expor capacidades do sistema para agentes de IA (MCP) | Ports & Adapters + Registry              |
+| `backend/`    | API em Node.js                                        | Clean Architecture + DDD modular         |
+| `frontend/`   | Web em React.js                                       | Feature-based + Atomic Design            |
+| `mobile/`     | App em React Native + Expo                            | Estrutura Rocketseat (src/ + aliases)    |
+| `mcp-server/` | Servidor MCP em Node.js                               | Ports & Adapters + Registry              |
 | `infra/`      | Docker, CI/CD, proxy                                  | —                                        |
 | `docs/`       | Arquitetura, ADRs, convenções                         | —                                        |
 
@@ -18,7 +19,16 @@ Estrutura base (sem código) para iniciar projetos fullstack com padrões consis
 
 ## Fluxo entre camadas
 ```
-Frontend (feature) ──HTTP──▶ Backend (controller → use-case → domain → repository)
+Frontend / Mobile ──HTTP──▶ Backend (controller → use-case → domain → repository)
                                           ▲
 MCP Server (tool → service → adapter) ────┘  (consome a API do backend, nunca o domínio direto)
 ```
+
+## Skills (Claude Code) — `.claude/skills/`
+| Skill                   | Aplica-se a                         |
+|-------------------------|-------------------------------------|
+| `engineering-standards` | Base comum: nomes, tipos, métodos, SOLID, patterns |
+| `frontend-react`        | `frontend/`                         |
+| `mobile-react-native`   | `mobile/`                           |
+| `backend-node`          | `backend/`                          |
+| `mcp-node`              | `mcp-server/`                       |
